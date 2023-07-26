@@ -54,15 +54,16 @@ app.get('/users/:name/:surname', (req, res) => {
 });
 
 // Route: /users/search?age=33 -> We found user of age 33: John Smith
-app.get('/users/search', (req, res) => {
-  const age = req.query.age;
-  const user = users.find(u => u.age === age);
+app.get('/user/search', (req, res) => {
+    const age = parseInt(req.query.age);
+    console.log("This is age: " + age);
+    const user = users.find(u => u.age === age);
 
-  if (user) {
+    if (user) {
     res.send(`We found user of age ${age}: ${user.name} ${user.surname}`);
-  } else {
+     } else {
     res.status(404).send(`We found no user of age ${age}.`);
-  }
+    }
 });
 
 // Start the server
