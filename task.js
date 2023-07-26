@@ -31,12 +31,23 @@ app.get('/users/:id', (req, res) => {
 });
 
 // Route: /users/John/Smith -> John Smith is of age 33
+// app.get('/users/:name/:surname', (req, res) => {
+//   const { name, surname } = req.params;
+//   const user = users.find(u => u.name === name && u.surname === surname);
+
+//   if (user) {
+//     res.send(`${user.name} ${user.surname} is of age ${user.age}`);
+//   } else {
+//     res.status(404).send("User not found.");
+//   }
+// });
+
 app.get('/users/:name/:surname', (req, res) => {
   const { name, surname } = req.params;
-  const user = users.find(u => u.name === name && u.surname === surname);
+  const user = users.filter(u => u.name === name && u.surname === surname);
 
-  if (user) {
-    res.send(`${user.name} ${user.surname} is of age ${user.age}`);
+  if (user.length>0) {
+    res.send(`${user[0].name} ${user[0].surname} is of age ${user[0].age}`);
   } else {
     res.status(404).send("User not found.");
   }
