@@ -7,12 +7,24 @@ const users = [
 ];
 
 // Route: /users/12 -> John Smith
+// app.get('/users/:id', (req, res) => {
+//     const id = parseInt(req.params.id);
+//     const user = users.find(u => u.id === id);
+    
+//   if (user) {
+//     res.send(`${user.name} ${user.surname}`);
+//   } else {
+//     res.status(404).send("User not found.");
+//   }
+// });
+
+// Route: /users/12 -> John Smith
 app.get('/users/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const user = users.find(u => u.id === id);
+  const user = users.filter(u => u.id === id);
 
-  if (user) {
-    res.send(`${user.name} ${user.surname}`);
+  if (user.length > 0) {
+    res.send(`${user[0].name} ${user[0].surname}`);
   } else {
     res.status(404).send("User not found.");
   }
